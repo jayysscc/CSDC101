@@ -1,0 +1,126 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cctype>  // For toupper
+
+using namespace std;
+
+void problem1() {
+    cout << "\n--- Problem 1: Basic Pricing Decision ---" << endl;
+    double money;
+    cout << "How much money do you have? $";
+    cin >> money;
+    if (money >= 1.0) {
+        cout << "Enjoy your lemonade!" << endl;
+    } else {
+        cout << "Sorry, you need more money." << endl;
+    }
+}
+
+void problem2() {
+    cout << "\n--- Problem 2: Weather-Based Discounts ---" << endl;
+    double temperature;
+    cout << "What is the temperature in °C? ";
+    cin >> temperature;
+    double price = (temperature >= 30.0) ? 0.80 : 1.00;
+    cout << fixed << setprecision(2);
+    cout << "The price for a cup of lemonade is $" << price << endl;
+}
+
+void problem3() {
+    cout << "\n--- Problem 3: Inventory Check ---" << endl;
+    int lemons, sugar;
+    cout << "How many lemons do you have? ";
+    cin >> lemons;
+    cout << "How many cups of sugar do you have? ";
+    cin >> sugar;
+    if (lemons <= 0 || sugar <= 0) {
+        cout << "You can't make lemonade!" << endl;
+    } else {
+        cout << "You're ready to sell lemonade!" << endl;
+    }
+}
+
+void problem4() {
+    cout << "\n--- Problem 4: Bulk Purchase Discount ---" << endl;
+    int cups;
+    cout << "How many cups do you want to buy? ";
+    cin >> cups;
+    double base_total = cups * 1.00;
+    double discount = 0.00;
+    if (cups >= 10) {
+        discount = 0.20;
+    } else if (cups >= 5) {
+        discount = 0.10;
+    }
+    double final_total = base_total * (1.0 - discount);
+    cout << fixed << setprecision(2);
+    cout << "The total cost is $" << final_total << endl;
+}
+
+void problem5() {
+    cout << "\n--- Problem 5: Player Movement ---" << endl;
+    int x = 0;
+    int y = 0;
+    string button_input;
+    cout << "Press a button (W, A, S, D): ";
+    cin >> button_input;
+    // Take the first character and convert to uppercase
+    if (!button_input.empty()) {
+        char button = toupper(button_input[0]);
+        if (button == 'W') {
+            y += 1;
+        } else if (button == 'S') {
+            y -= 1;
+        } else if (button == 'A') {
+            x -= 1;
+        } else if (button == 'D') {
+            x += 1;
+        } else {
+            cout << "Invalid button! No movement." << endl;
+        }
+    } else {
+        cout << "Invalid input! No movement." << endl;
+    }
+    cout << "New position: (" << x << ", " << y << ")" << endl;
+}
+
+int main() {
+    int choice;
+    cout << fixed << setprecision(2);  // Set global precision for floats
+    
+    while (true) {
+        cout << "\n=== Combined Lemonade Stand & Player Movement Program ===" << endl;
+        cout << "1. Basic Pricing Decision" << endl;
+        cout << "2. Weather-Based Discounts" << endl;
+        cout << "3. Inventory Check" << endl;
+        cout << "4. Bulk Purchase Discount" << endl;
+        cout << "5. Player Movement" << endl;
+        cout << "6. Exit" << endl;
+        cout << "Enter your choice (1-6): ";
+        cin >> choice;
+        
+        if (choice == 1) {
+            problem1();
+        } else if (choice == 2) {
+            problem2();
+        } else if (choice == 3) {
+            problem3();
+        } else if (choice == 4) {
+            problem4();  
+        } else if (choice == 5) {
+            problem5();
+        } else if (choice == 6) {
+            cout << "Goodbye!" << endl;
+            break;
+        } else {
+            cout << "Invalid choice. Please try again." << endl;
+        }
+        
+        // Clear any leftover input
+        cin.clear();
+        cin.ignore(10000, '\n');
+    }
+    
+    return 0;
+}
